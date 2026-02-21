@@ -1,0 +1,602 @@
+/* ═══════════════════════════════════════════════════════════
+   CAMU — Landing Page Styles
+   Visual language: Manufacturing floor stand-up board
+   Every element maps to something physical on that board.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── PALETTE ─── */
+:root {
+    --board:   #FDFCF8;         /* dry-erase surface — warm, not glossy */
+    --ink:     #1a1a1a;         /* bold expo marker */
+    --faded:   #777777;         /* faded marker / pencil notes */
+    --light:   #b0b0b0;         /* very faded, like old marks */
+    --tape:    #1a1a1a;         /* black pinstripe tape */
+    --green:   #2d8f2d;         /* green circle magnet */
+    --red:     #cc3333;         /* red circle magnet */
+    --amber:   #e68a00;         /* amber marker accent */
+    --board-edge: #e8e5df;      /* shadow at board edges */
+}
+
+/* ─── RESET & BASE ─── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 18px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Barlow', -apple-system, sans-serif;
+    color: var(--ink);
+    background: #f0ede7;
+    line-height: 1.6;
+}
+
+/* ─── THE BOARD ─── */
+.board {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: var(--board);
+    position: relative;
+    /* subtle board texture */
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 200px,
+            rgba(0,0,0,0.008) 200px,
+            rgba(0,0,0,0.008) 201px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 200px,
+            rgba(0,0,0,0.005) 200px,
+            rgba(0,0,0,0.005) 201px
+        );
+    background-color: var(--board);
+    /* board shadow — like a whiteboard mounted on a wall */
+    box-shadow:
+        0 1px 3px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.08),
+        inset 0 0 80px rgba(0,0,0,0.01);
+}
+
+/* ─── TAPE LINES (section dividers) ─── */
+.tape-line {
+    height: 2px;
+    background: var(--tape);
+    margin: 0 2.5rem;
+    position: relative;
+    opacity: 0.85;
+}
+
+/* faint shine on tape — physical feel */
+.tape-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.3) 20%,
+        rgba(255,255,255,0.3) 80%,
+        transparent 100%
+    );
+}
+
+/* ─── SECTION LAYOUT ─── */
+.section {
+    padding: 3.5rem 2.5rem;
+}
+
+.section-inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ─── TYPOGRAPHY ─── */
+
+/* CAMU wordmark — expo marker drawn on the board */
+.wordmark {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 900;
+    font-size: 6rem;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    color: var(--ink);
+    /* marker ink characteristics */
+    text-shadow:
+        1px 0 0 rgba(26,26,26,0.15),
+        -0.5px 0.5px 0 rgba(26,26,26,0.08);
+    /* slight imperfection — the C sits a hair low */
+    position: relative;
+}
+
+/* Section headers — like writing a topic at the top of a board section */
+.section-header {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 800;
+    font-size: 1.75rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+/* Product wordmarks share the marker style */
+.product-wordmark {
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-shadow:
+        0.5px 0 0 rgba(26,26,26,0.12);
+}
+
+/* ─── HERO ─── */
+.hero {
+    padding: 5rem 2.5rem 4rem;
+    text-align: center;
+}
+
+.hero-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tagline {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--faded);
+    margin-top: 1.5rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 2.5rem;
+    padding: 0.85rem 2.2rem;
+    background: var(--ink);
+    color: var(--board);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border: 2px solid var(--ink);
+    transition: background 0.15s ease, color 0.15s ease;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: transparent;
+    color: var(--ink);
+}
+
+/* ─── MAGNETS ─── */
+/* Solid circle magnets — the ones stuck to whiteboards everywhere */
+.magnet {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* physical depth — magnet sits on the board */
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.15),
+        inset 0 -1px 1px rgba(0,0,0,0.1),
+        inset 0 1px 1px rgba(255,255,255,0.2);
+}
+
+.magnet-green  { background: var(--green); }
+.magnet-red    { background: var(--red); }
+.magnet-amber  { background: var(--amber); }
+
+/* ─── THE PROBLEM ─── */
+.problem-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.problem-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.problem-item .magnet {
+    margin-top: 0.35rem;
+}
+
+.problem-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink);
+}
+
+.problem-summary {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink);
+}
+
+/* ─── VALUES GRID ─── */
+.values-intro {
+    color: var(--faded);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    /* tape border around the grid */
+    border: 2px solid var(--tape);
+}
+
+.value-card {
+    padding: 1.75rem;
+    position: relative;
+}
+
+/* inner tape lines in the grid */
+.value-card:nth-child(1),
+.value-card:nth-child(2) {
+    border-bottom: 2px solid var(--tape);
+}
+
+.value-card:nth-child(1),
+.value-card:nth-child(3) {
+    border-right: 1px solid var(--tape);
+}
+
+.value-card:nth-child(2),
+.value-card:nth-child(4) {
+    border-left: 1px solid var(--tape);
+}
+
+.value-card .magnet {
+    margin-bottom: 0.75rem;
+}
+
+.value-card h3 {
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+}
+
+.value-phrase {
+    font-style: italic;
+    color: var(--faded);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.value-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink);
+}
+
+/* ─── GEMBABOT SECTION ─── */
+.gembabot-intro {
+    font-size: 1.1rem;
+    color: var(--faded);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* The loop — Walk → Flag → Review → Action → Close */
+.loop {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0 -0.5rem;
+}
+
+.loop-step {
+    flex: 1;
+    padding: 0 0.5rem;
+}
+
+.loop-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.loop-step h4 {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.35rem;
+}
+
+.loop-step p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--faded);
+}
+
+.loop-arrow {
+    display: flex;
+    align-items: center;
+    padding-top: 0.15rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--light);
+    flex-shrink: 0;
+}
+
+.gembabot-cta {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--board-edge);
+}
+
+.cta-link {
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    font-size: 1.05rem;
+    transition: opacity 0.15s ease;
+}
+
+.cta-link:hover {
+    opacity: 0.7;
+}
+
+/* ─── ECOSYSTEM ─── */
+.ecosystem-intro {
+    color: var(--faded);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+
+.ecosystem-list {
+    border: 2px solid var(--tape);
+}
+
+.eco-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(26,26,26,0.15);
+}
+
+.eco-item:last-child {
+    border-bottom: none;
+}
+
+.eco-name {
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    min-width: 120px;
+    /* marker style for product names */
+    text-shadow: 0.3px 0 0 rgba(26,26,26,0.08);
+}
+
+.eco-desc {
+    flex: 1;
+    color: var(--faded);
+    font-size: 0.9rem;
+}
+
+.eco-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--faded);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.eco-status-live {
+    color: var(--green);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+    padding: 2.5rem 2.5rem;
+    text-align: center;
+}
+
+.footer-tagline {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: opacity 0.15s ease;
+}
+
+.footer-link:hover {
+    opacity: 0.7;
+}
+
+.footer-sep {
+    color: var(--light);
+}
+
+.footer-social {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--faded);
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: var(--light);
+    margin-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tablets and smaller */
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .board {
+        margin: 0;
+        box-shadow: none;
+    }
+
+    .section {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .hero {
+        padding: 3.5rem 1.5rem 3rem;
+    }
+
+    .tape-line {
+        margin: 0 1.5rem;
+    }
+
+    .wordmark {
+        font-size: 4rem;
+    }
+
+    .tagline {
+        font-size: 1.1rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .value-card:nth-child(1),
+    .value-card:nth-child(2) {
+        border-bottom: 2px solid var(--tape);
+    }
+
+    .value-card:nth-child(1),
+    .value-card:nth-child(3) {
+        border-right: none;
+    }
+
+    .value-card:nth-child(2),
+    .value-card:nth-child(4) {
+        border-left: none;
+    }
+
+    .value-card:nth-child(3) {
+        border-bottom: 2px solid var(--tape);
+    }
+
+    .value-card:last-child {
+        border-bottom: none;
+    }
+
+    /* Stack the loop vertically on mobile */
+    .loop {
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+    }
+
+    .loop-step {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--board-edge);
+    }
+
+    .loop-step:last-child {
+        border-bottom: none;
+    }
+
+    .loop-step .loop-number {
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .loop-step h4 {
+        margin-bottom: 0.15rem;
+    }
+
+    .loop-step p {
+        font-size: 0.85rem;
+    }
+
+    .loop-arrow {
+        display: none;
+    }
+
+    .eco-item {
+        flex-wrap: wrap;
+    }
+
+    .eco-name {
+        min-width: auto;
+    }
+
+    .eco-desc {
+        flex-basis: 100%;
+        order: 3;
+        margin-left: calc(14px + 0.75rem);
+        margin-top: -0.25rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+    .wordmark {
+        font-size: 3rem;
+        letter-spacing: 0.12em;
+    }
+
+    .section-header {
+        font-size: 1.4rem;
+    }
+
+    .tagline br {
+        display: none;
+    }
+}
