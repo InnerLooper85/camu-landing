@@ -31,6 +31,10 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+    color: inherit;
+}
+
 body {
     font-family: 'Barlow', -apple-system, sans-serif;
     color: var(--ink);
@@ -182,6 +186,16 @@ body {
     color: var(--ink);
 }
 
+.cta-button-outline {
+    background: transparent;
+    color: var(--ink);
+}
+
+.cta-button-outline:hover {
+    background: var(--ink);
+    color: var(--board);
+}
+
 /* ─── MAGNETS ─── */
 /* Solid circle magnets — the ones stuck to whiteboards everywhere */
 .magnet {
@@ -231,6 +245,14 @@ body {
     font-size: 1.05rem;
     line-height: 1.6;
     color: var(--ink);
+}
+
+.story-cta {
+    padding: 2.5rem 2.5rem;
+}
+
+.story-cta .cta-button {
+    margin-top: 0;
 }
 
 /* ─── VALUES GRID ─── */
@@ -473,22 +495,17 @@ body {
 }
 
 /* ─── STORY PAGE ─── */
-.story-nav {
-    padding: 1.5rem 2.5rem;
-}
-
-.nav-wordmark {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 900;
-    font-size: 1.5rem;
-    letter-spacing: 0.15em;
-    color: var(--ink);
+.wordmark-link {
     text-decoration: none;
-    text-shadow: 0.5px 0 0 rgba(26,26,26,0.12);
+    color: inherit;
 }
 
-.nav-wordmark:hover {
+.wordmark-link:hover {
     opacity: 0.7;
+}
+
+.story-hero {
+    padding: 3.5rem 2.5rem 2.5rem;
 }
 
 .story-title {
